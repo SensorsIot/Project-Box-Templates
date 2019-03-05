@@ -1,7 +1,18 @@
+// Qick and dirty example for a simple box with lid
+//
+
+// set box parameters
+box_length = 35;
+box_width = 20;
+box_height = 10;
+box_corner_radius = 5;
+box_wall_thickness = 1;
+
 $fn=200;
+
  
-box_and_lid(35,20,25,5,1);
-//roundBox(35, 20, 25, 5);
+box_and_lid(box_length, box_width, box_height, box_corner_radius, box_wall_thickness);
+
 
 module box_and_lid(length, width, height, cornerRadius, thick){
     box(length, width, height, cornerRadius, thick);
@@ -16,9 +27,10 @@ module box(length, width, height, cornerRadius, thick){
          }
     }
 }
+
 module lid(length, width, height, cornerRadius, thick){
-    translate([width*2+10, 0, 0]){
-        mirror([1,0,0]) {
+    translate([width*2, 0, 0]){
+        union() {
             roundBox(length+2*thick, width+2*thick, thick, cornerRadius);
             difference(){
                     difference() {
